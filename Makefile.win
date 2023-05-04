@@ -1,0 +1,36 @@
+# Project: Speedman2
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Speedman2_private.res
+OBJ      = main.o class.o $(RES)
+LINKOBJ  = main.o class.o $(RES)
+LIBS     = -L"E:/Dev-Cpp/MinGW64/lib" -L"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -L"E:/Dev-Cpp/SFML/lib" -static-libgcc -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -lsfml-network
+INCS     = -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"E:/Dev-Cpp/SFML/include"
+BIN      = Speedman2.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+class.o: class.cpp
+	$(CPP) -c class.cpp -o class.o $(CXXFLAGS)
+
+Speedman2_private.res: Speedman2_private.rc 
+	$(WINDRES) -i Speedman2_private.rc --input-format=rc -o Speedman2_private.res -O coff 
+
